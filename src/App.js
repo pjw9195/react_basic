@@ -6,36 +6,10 @@ import Movie from './movie';
 class App extends Component {
   state = {};
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        movies: [
-          {
-            title: 'Matrix',
-            poster:
-              'http://2korea.hani.co.kr/files/attach/images/64/981/316/001.jpg',
-          },
-          {
-            title: 'Full Metal Jacket',
-            poster:
-              'http://image.yes24.com/momo/TopCate1936/MidCate002/193514261.jpg',
-          },
-          {
-            title: 'Oldboy',
-            poster:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3zD87lp1lNjdI5zP71yXMNOKU0e39yUveuQuEU4l8MJeclXgP',
-          },
-          {
-            title: 'Star Wars',
-            poster:
-              'https://vignette.wikia.nocookie.net/starwars/images/1/12/TheLastJediTheatricalPoster.jpg/revision/latest?cb=20171014042219&path-prefix=ko',
-
-            title: 'Transporting',
-            poster:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3zD87lp1lNjdI5zP71yXMNOKU0e39yUveuQuEU4l8MJeclXgP',
-          },
-        ],
-      });
-    }, 3000);
+    fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+      .then(response => response.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err));
   }
   _renderMovies = () => {
     const movies = this.state.movies.map((movie, index) => (
